@@ -4,9 +4,9 @@
     'name': "Colombian e-invoice",
 
     'summary': """
-        genera la facturacion electronica para la distribucion colombiana segun requisitos de la DIAN""",
+        Generates electronic invoice for Colombian distribution according to DIAN requirements - Odoo 12.0""",
     'category': 'Administration',
-    'version': '10.0',
+    'version': '12.0.0.1.1',
     'depends': [
         'base',
         'account',
