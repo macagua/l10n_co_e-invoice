@@ -8,7 +8,11 @@
     'category': 'Administration',
     'version': '10.0',
     'depends': [
-        'account', 'l10n_co_tax_extension', 'base', 'contacts'
+        'base',
+        'account',
+        'contacts',
+        'stock',
+        'l10n_co_tax_extension'
     ],
     'data': [
         'security/ir.model.access.csv',
