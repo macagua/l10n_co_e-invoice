@@ -1,0 +1,8 @@
+pyOpenSSL==19.1.0
+requests==2.24.0
+xmltodict==0.12.0
+lxml==4.2.3
+pytz==2016.7
+PyQRCode==1.2.1
+pypng==0.0.20
+
