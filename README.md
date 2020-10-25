@@ -1,12 +1,12 @@
-# Facturación electrónica para Colombia
+# Colombian e-invoice
 
-Este módulo extiende el módulo de Facturación para Odoo 12 en la localización de Colombia, agregando la siguientes características:
+This module extends the Invoicing module for Odoo 12 in the Colombian location, adding the following features:
 
-* Genera factura electrónica para distribución colombiana según requerimientos DIAN.
+* Generates electronic invoice for Colombian distribution according to DIAN requirements.
 
-# Instalación
+# Install
 
-Las librerías requeridas, deben ser instaladas ejecutando el siguiente comando:
+The required libraries must be installed by executing the following command:
 
   $ pip install -r requirements.txt
 
