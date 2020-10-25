@@ -26,12 +26,12 @@ class AccountInvoice(models.Model):
     contingency_3 = fields.Boolean(string='Contingencia tipo 3', default=False, help='Cuando el facturador no puede expedir la factura electrónica por inconvenientes tecnológicos')
     contingency_4 = fields.Boolean(string='Contingencia tipo 4', default=False, help='Cuando las causas son atribuibles a situaciones de índole tecnológico a cargo de la DIAN')
     # contingency_type = fields.Selection([('no_contingency','Sin contigencia'),
-    #     ('contingency_type3','Contigencia tipo 3 - Cuando el facturador no puede expedir la factura electrónica por inconvenientes tecnológicos'),
-    #     ('contingency_type4','Contigencia tipo 4 - Cuando las causas son atribuibles a situaciones de índole tecnológico a cargo de la DIAN')], 
-    #     string='Tipo de contigencia', required=True, default='no_contingency')
-    xml_response_contingency_dian = fields.Text(string='Mensaje de respuesta DIAN al envío de la contigencia', related='diancode_id.xml_response_contingency_dian')
+    #     ('contingency_type3','Contingencia tipo 3 - Cuando el facturador no puede expedir la factura electrónica por inconvenientes tecnológicos'),
+    #     ('contingency_type4','Contingencia tipo 4 - Cuando las causas son atribuibles a situaciones de índole tecnológico a cargo de la DIAN')],
+    #     string='Tipo de contingencia', required=True, default='no_contingency')
+    xml_response_contingency_dian = fields.Text(string='Mensaje de respuesta DIAN al envío de la contingencia', related='diancode_id.xml_response_contingency_dian')
     state_contingency = fields.Selection(string="Estatus de contingencia", related='diancode_id.state_contingency')
-    contingency_invoice_number = fields.Char('Número de factura de contigencia')
+    contingency_invoice_number = fields.Char('Número de factura de contingencia')
     count_error_DIAN =  fields.Integer(string="contador de intentos fallidos por problemas de la DIAN", related='diancode_id.count_error_DIAN')
     in_contingency_4 = fields.Boolean(string="En contingencia", related='company_id.in_contingency_4')
     exists_invoice_contingency_4 = fields.Boolean(string="Cantidad de facturas con contingencia 4 sin reportar a la DIAN", related='company_id.exists_invoice_contingency_4')
@@ -207,7 +207,7 @@ class AccountInvoice(models.Model):
                 mensaje += '- La resolución DIAN  no tiene asociada la clave técnica.' + '\n'
 
             if mensaje:
-                mensaje += '- El diario seleccionado es '+ str((self.journal_id.name.encode('utf-8'))) +', verifique si es el correcto, este debe tener bien configurada la clave tecnica y el numero de resolucion que la DIAN le otorgo' + '\n'
+                mensaje += '- El diario seleccionado es '+ str((self.journal_id.name.encode('utf-8'))) +', verifique si es el correcto, este debe tener bien configurada la clave técnica y el numero de resolución que la DIAN le otorgo' + '\n'
 
             # Verifica datos de la compañia
             company = self.company_id
@@ -217,13 +217,13 @@ class AccountInvoice(models.Model):
             if not company.software_identification_code:
                 mensaje += '- No se encuentra registrado el código de identificación del software.' + '\n'
             if not company.password_environment:
-                mensaje += '- No se encuentra registrado el password del ambiente.' + '\n'
+                mensaje += '- No se encuentra registrado la contraseña del ambiente.' + '\n'
             if not partner.country_id.code:
                 mensaje += '- Su empresa no tiene registrado el país.' + '\n'
             if not partner.xidentification:
                 mensaje += '- Su empresa no tiene registrado el NIT.' + '\n'
             if not partner.company_type:
-                mensaje += '- Su empresa no está identificada como persona juríduca o persona natural.' + '\n'
+                mensaje += '- Su empresa no está identificada como persona jurídica o persona natural.' + '\n'
             if not partner.doctype:
                 mensaje += '- Su empresa no tiene asociada un tipo de documento.' + '\n'
             if not partner.state_id:
@@ -252,13 +252,13 @@ class AccountInvoice(models.Model):
             if not self.currency_id.name:
                 mensaje += '- El cliente no posee una moneda asociada.' + '\n'
             if not self.partner_id.company_type:
-                mensaje += '- No se ha definido si el cliente es una persona natural o juridica.' + '\n'
+                mensaje += '- No se ha definido si el cliente es una persona natural o jurídica.' + '\n'
             if not self.partner_id.xidentification:
                 mensaje += '- El cliente no tiene registrado el NIT.' + '\n'
             if not self.partner_id.doctype:
                 mensaje += '- El cliente no tiene asociada un tipo de documento.' + '\n'
             if not self.partner_id.fiscal_responsability_ids:
-                mensaje += '- El cliente no tiene asociada una responsabilidad fiscal, para solucionarlo abra el cliente y busque asegure que el campo posicion fiscal tiene valor' + '\n'
+                mensaje += '- El cliente no tiene asociada una responsabilidad fiscal, para solucionarlo abra el cliente y busque asegure que el campo posición fiscal tiene valor' + '\n'
             if not self.partner_id.country_id.code:
                 mensaje += '- El cliente no tiene asociada un país.' + '\n'
             if not self.partner_id.state_id.name:
@@ -272,7 +272,7 @@ class AccountInvoice(models.Model):
             if not self.partner_id.tribute_id:
                 mensaje += '- El cliente no tiene asociada un tributo de los indicados en la tabla 6.2.2 Tributos indicado en la tabla 6.2.2 Tributos, para solucionarlo abra el cliente y busque asegure que el campo tributos tiene valor' + '\n' 
             if not self.partner_id.email:
-                mensaje += '- El cliente no tiene definido un email.' + '\n'
+                mensaje += '- El cliente no tiene definido un correo electrónico.' + '\n'
             # Verifica que existan asociados impuestos al grupo de impuestos IVA, ICA y ICO       
             rec_account_invoice_tax = self.env['account.invoice.tax'].search([('invoice_id', '=', self.id)])
             if rec_account_invoice_tax:
@@ -285,7 +285,7 @@ class AccountInvoice(models.Model):
                     for line_tax in data_line.invoice_line_tax_ids:        
                         rec_tax = self.env['account.tax'].search([('id', '=', line_tax.id)])
                         if not rec_tax.tributes:
-                            mensaje += '- Algunos impueso indicados en la factura no tiene un tributo asociado según los tributos indicados en la tabla 6.2.2 Tributos.' + '\n'
+                            mensaje += '- Algunos impuestos indicados en la factura no tiene un tributo asociado según los tributos indicados en la tabla 6.2.2 Tributos.' + '\n'
             if data_lines_doc:
                 for data_line in data_lines_doc:
                     count_line_taxt = 0
@@ -312,7 +312,7 @@ class AccountInvoice(models.Model):
             elif self.type == 'out_refund': 
                 raise ValidationError("No puede validar notas de crédito mientras se encuentra en estado de contingencia tipo 4")
             if self.state_contingency == 'exitosa':
-                raise ValidationError("Factura de contingencia tipo 4 ya fue enviada al cliente. Una vez se restablezca el servicio, debe pulsar este bóton para enviar la contingencia tipo 4 bota la DIAN")
+                raise ValidationError("Factura de contingencia tipo 4 ya fue enviada al cliente. Una vez se restablezca el servicio, debe pulsar este botón para enviar la contingencia tipo 4 bota la DIAN")
 
         if document_dian.state == 'rechazado':
             document_dian.response_message_dian = ' '
@@ -343,7 +343,7 @@ class AccountInvoice(models.Model):
         if company.production == False and self.in_contingency_4 == False:
             if document_dian.state == 'por_validar':
                 document_dian.request_validating_dian(document_dian.id)
-        # Determina si existen facturas con contingencias tipo 4 que no han sidoenviadas a la DIAN
+        # Determina si existen facturas con contingencias tipo 4 que no han sido enviadas a la DIAN
         #company.exists_invoice_contingency_4 = False
         documents_dian_contingency = self.env['dian.document'].search([('state', '=', 'por_notificar'), ('contingency_4', '=', True), ('document_type', '=', 'f')])
         for document_dian_contingency in documents_dian_contingency:

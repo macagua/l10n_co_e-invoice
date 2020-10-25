@@ -10,7 +10,7 @@
         <div class="row" t-if="o.diancode_id" style="margin-left:0px; margin-top: 25px;">
           <div class="col-xs-2">
             <h2 style="font-size:23px; margin-bottom: 15px; padding-bottom: 15px; margin-top: 20px;">
-                <span t-if="o.diancode_id.document_type == 'f'">Factura Electronica de Venta</span>
+                <span t-if="o.diancode_id.document_type == 'f'">Factura Electrónica de Venta</span>
                 <span t-if="o.diancode_id.document_type == 'd'">Nota de Débito</span>
                 <span t-if="o.diancode_id.document_type == 'c'">Nota de Crédito</span>
                 <span t-field="o.diancode_id.dian_code"/>

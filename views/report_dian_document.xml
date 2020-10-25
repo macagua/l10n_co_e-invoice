@@ -61,7 +61,7 @@
 		            <table class="table table-condensed">
 		                <thead>
 		                    <tr>
-		                        <th>Descripcion</th>
+		                        <th>Descripción</th>
 		                        <th class="text-right">Cantidad</th>
 		                        <th class="text-right">Precio unitario</th>
 		                        <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Descuento(%)</th>

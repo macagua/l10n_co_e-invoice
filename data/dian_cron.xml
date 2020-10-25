@@ -3,7 +3,7 @@
     <data noupdate="0"> 
 
         <record id="dian_validate_accept_email_invoice_cron" model="ir.cron">
-            <field name="name">Aceptacion email del cliente luego de pasados 3 dias</field>
+            <field name="name">Aceptación de correo electrónico del cliente luego de pasados 3 días</field>
             <field eval="True" name="active"/>
             <field name="user_id" ref="base.user_root"/>
             <field name="interval_number">1</field>

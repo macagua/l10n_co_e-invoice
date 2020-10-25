@@ -3,7 +3,7 @@
     <data noupdate="1">
         <!-- Nota de débito sequences-->
         <record id="sequence_order_payment" model="ir.sequence">
-            <field name="name">Nota de debito sequence</field>
+            <field name="name">Nota de débito sequence</field>
             <field name="code">nota_debito.sequence</field>
             <field name="prefix">NDCL</field>
             <field name="number_next" eval="1" />

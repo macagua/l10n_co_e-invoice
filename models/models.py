@@ -16,8 +16,8 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     operation_type = fields.Selection([('01','Combustible'),('02','Emisor es Autoretenedor'),('03','Excluidos y Exentos'),
-    ('04','Exportación'),('05','Generica'),('06','Generica con pago anticipado'),
-    ('07','Generica con periodo de facturacion'),('08','Consorcio'),('09','Servicios AIU'),('10','Estandar'),
+    ('04','Exportación'),('05','Genérica'),('06','Genérica con pago anticipado'),
+    ('07','Genérica con periodo de facturación'),('08','Consorcio'),('09','Servicios AIU'),('10','Estándar'),
     ('11','Mandatos bienes'),('12','Mandatos Servicios'),('00', 'No Aplica')], string='Tipo de operación DIAN')
 	
     product_UNSPSC_id = fields.Many2one('dian.unspsc.product', string="Producto UNSPSC")

@@ -133,7 +133,7 @@ class DianDocument(models.Model):
                                         ('104','104 Sólo un archivo es permitido por archivo Zip'), 
                                         ('200','200 Ejemplar recibido exitosamente pasará a verificación'),
                                         ('300','300 Archivo no soportado: Solo reconoce los tipos Invoice, DebitNote o CreditNote'),
-                                        ('310','310 El ejemplar contiene errores de validación semantica'), 
+                                        ('310','310 El ejemplar contiene errores de validación semántica'),
                                         ('320','320 Parámetros de solicitud de servicio web, no coincide contra el archivo'),
                                         ('500','500 Error interno del servicio intentar nuevamente')],
                             string="Respuesta de envío",
@@ -149,27 +149,27 @@ class DianDocument(models.Model):
                             readonly=True)
     dian_code = fields.Char(string='Código DIAN', readonly=True)
     xml_document = fields.Text(string='Contenido XML del documento', readonly=True)
-    xml_document_contingency = fields.Text(string='Contenido XML del documento de contigencia', readonly=True)
+    xml_document_contingency = fields.Text(string='Contenido XML del documento de contingencia', readonly=True)
     xml_file_name = fields.Char(string='Nombre archivo xml', readonly=True)
     zip_file_name = fields.Char(string='Nombre archivo zip', readonly=True)
     date_request_dian = fields.Datetime(string="Fecha consulta DIAN", readonly=True)
     cufe = fields.Char(string='CUFE', readonly=True)
     QR_code = fields.Binary(string='Código QR', readonly=True)
-    date_email_send = fields.Datetime(string="Fecha envío email", readonly=True)
-    date_email_acknowledgment = fields.Datetime(string="Fecha acuse email", readonly=True)
+    date_email_send = fields.Datetime(string="Fecha envío de correo electrónico", readonly=True)
+    date_email_acknowledgment = fields.Datetime(string="Fecha acuse de correo electrónico", readonly=True)
     response_message_dian = fields.Text(string="Respuesta DIAN", readonly=True)
     last_shipping = fields.Boolean(string="Ultimo envío", default=True)
     customer_name = fields.Char(string="Cliente", readonly=True, related='document_id.partner_id.name')
     date_document = fields.Date(string="Fecha documento", readonly=True, related='document_id.date_invoice')
-    customer_email = fields.Char(string="Email cliente", readonly=True, related='document_id.partner_id.email')
-    document_type = fields.Selection([('f','Factura'), ('c','Nota/Credito'), ('d','Nota/Debito')], string="Tipo de documento", readonly=True)
+    customer_email = fields.Char(string="Correo electrónico del cliente", readonly=True, related='document_id.partner_id.email')
+    document_type = fields.Selection([('f','Factura'), ('c','Nota/Crédito'), ('d','Nota/Débito')], string="Tipo de documento", readonly=True)
     resend = fields.Boolean(string="Autorizar reenvio?", default=False)
     email_response = fields.Selection([('accepted','ACEPTADA'),('rejected','RECHAZADA'),('pending','PENDIENTE')], string='Decisión del cliente', required=True, default='pending', readonly=True)
     email_reject_reason = fields.Char(string='Motivo del rechazo', readonly=True)
-    ZipKey = fields.Char(string='Identificador del docuemnto enviado', readonly=True)
+    ZipKey = fields.Char(string='Identificador del documento enviado', readonly=True)
     xml_response_dian = fields.Text(string='Contenido XML de la respuesta DIAN', readonly=True)
     xml_send_query_dian = fields.Text(string='Contenido XML de envío de consulta de documento DIAN', readonly=True)
-    xml_response_contingency_dian = fields.Text(string='Mensaje de respuesta DIAN al envío de la contigencia', readonly=True)
+    xml_response_contingency_dian = fields.Text(string='Mensaje de respuesta DIAN al envío de la contingencia', readonly=True)
     state_contingency = fields.Selection([('por_notificar','por_notificar'),
                             ('exitosa', 'Exitosa'), 
                             ('rechazada', 'Rechazada')],
@@ -729,7 +729,7 @@ class DianDocument(models.Model):
                     if self.enviar_email(data_xml_document, doc_send_dian.document_id.id, fileName):
                         doc_send_dian.write({'state_contingency' : 'exitosa', 'resend' : False})
                         doc_send_dian.date_email_send = fields.Datetime.now()
-                        doc_send_dian.xml_response_contingency_dian = 'XML de factura de contigencia enviada al cliente'
+                        doc_send_dian.xml_response_contingency_dian = 'XML de factura de contingencia enviada al cliente'
                     else:
                         doc_send_dian.write({'state_contingency' : 'rechazada', 'resend' : True})
                         doc_send_dian.xml_response_dian = ' '
@@ -770,7 +770,7 @@ class DianDocument(models.Model):
             plantilla_correo.attachment_ids = rs_invoice.xml_adjunto_ids
             plantilla_correo.send_mail(rs_invoice.id, force_send = True) 
         else:       
-            raise ValidationError("No existe la plantilla de correo email_template_edi_invoice_dian para el email")
+            raise ValidationError("No existe la plantilla de correo email_template_edi_invoice_dian para el correo electrónico")
         return True
 
 
@@ -3116,7 +3116,7 @@ class DianDocument(models.Model):
     @api.model
     def _generate_nonce(self, InvoiceID, seed_code):
         # NonceEncodingType. Se obtiene de:
-        # 1. Calcular un valor aleatorio cuya semilla será definida y solamante conocida por el facturador 
+        # 1. Calcular un valor aleatorio cuya semilla será definida y solamente conocida por el facturador
         # electrónico 
         # 2. Convertir a Base 64 el valor aleatorio obtenido.
         nonce = randint(1,seed_code)

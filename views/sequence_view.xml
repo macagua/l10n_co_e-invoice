@@ -3,7 +3,7 @@
 
 
     <record id="sequence_view_extended" model="ir.ui.view">
-        <field name="name">extension de secuenciador dian</field>
+        <field name="name">extensión de secuenciador DIAN</field>
         <field name="model">ir.sequence</field>
         <field name="inherit_id" ref="l10n_co_tax_extension.sequence_view"></field>
         <field name="arch" type="xml">

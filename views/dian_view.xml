@@ -97,7 +97,7 @@
                 <filter name="filter_nc" string="Nota/Credito" domain="[('document_type','=','c')]"/>
                 <filter name="filter_nd" string="Nota/Debito" domain="[('document_type','=','d')]"/>
                 <separator/>
-                <filter name="filter_last_shipping" string="solo envios actuales" domain="[('last_shipping','=',True)]"/>
+                <filter name="filter_last_shipping" string="solo envíos actuales" domain="[('last_shipping','=',True)]"/>
                 <separator/>
                 <filter name="group_state" string="Por status" context="{'group_by' : 'state'}"/>
                 <filter name="group_document_type" string="Por tipo documento" context="{'group_by' : 'document_type'}"/>
@@ -240,7 +240,7 @@
 
 
     <record id="request_validating_dian_cron" model="ir.cron">
-        <field name="name">Solicitar validacion de documentos enviados al DIAN</field>
+        <field name="name">Solicitar validación de documentos enviados al DIAN</field>
         <field name="model">dian.document</field>
         <field name="function">request_validating_dian</field>
         <field name="args">()</field>
