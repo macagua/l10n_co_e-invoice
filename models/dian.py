@@ -745,7 +745,6 @@ class DianDocument(models.Model):
         return  
 
 
-    @api.multi
     def enviar_email(self, data_xml_document, invoice_id, fileName):
         rs_invoice = self.env['account.invoice'].sudo().search([('id', '=', invoice_id)])
         dian_xml = base64.b64encode(data_xml_document.encode())
@@ -774,7 +773,6 @@ class DianDocument(models.Model):
         return True
 
 
-    @api.multi
     def _generate_SignatureValue_GetStatus(self, document_repository, password, data_xml_SignedInfo_generate, archivo_pem, archivo_certificado):
         data_xml_SignatureValue_c14n = etree.tostring(etree.fromstring(data_xml_SignedInfo_generate), method="c14n")
         #data_xml_SignatureValue_c14n = data_xml_SignatureValue_c14n.decode()
@@ -2890,7 +2888,6 @@ class DianDocument(models.Model):
         return data_xml_signature
 
 
-    @api.multi
     def _generate_signature_ref1(self, data_xml_keyinfo_generate, document_repository, password):
         # Generar la referencia 1 que consiste en obtener keyvalue desde el keyinfo contenido 
         # en el documento electrónico aplicando el algoritmo SHA256 y convirtiendolo a base64
@@ -2912,7 +2909,6 @@ class DianDocument(models.Model):
         return elementTo_base
 
 
-    @api.multi
     def _generate_signature_politics(self, document_repository):
         # Generar la referencia 2 que consiste en obtener keyvalue desde el documento de politica 
         # aplicando el algoritmo SHA1 antes del 20 de septimebre de 2016 y sha256 después  de esa 
@@ -2930,7 +2926,6 @@ class DianDocument(models.Model):
         return data_xml_politics
 
 
-    @api.multi
     def _generate_signature_ref2(self, data_xml_SignedProperties_generate):
         # Generar la referencia 2, se obtine desde el elemento SignedProperties que se 
         # encuentra en la firma aplicando el algoritmo SHA256 y convirtiendolo a base64.
@@ -2942,7 +2937,6 @@ class DianDocument(models.Model):
         return data_xml_SignedProperties_base
 
 
-    @api.multi
     def _generate_CertDigestDigestValue(self, digital_certificate, password, document_repository, archivo_certificado):
         archivo_key = document_repository +'/'+archivo_certificado
         key = crypto.load_pkcs12(open(archivo_key, 'rb').read(), password) 
@@ -2952,7 +2946,6 @@ class DianDocument(models.Model):
         return CertDigestDigestValue
 
 
-    @api.multi
     def _generate_SignatureValue(self, document_repository, password, data_xml_SignedInfo_generate, 
             archivo_pem, archivo_certificado):
         data_xml_SignatureValue_c14n = etree.tostring(etree.fromstring(data_xml_SignedInfo_generate), method="c14n", exclusive=False, with_comments=False)
@@ -3020,8 +3013,7 @@ class DianDocument(models.Model):
         now_time = now_utc.strftime(fmt)
         return now_time
 
-    
-    @api.multi
+
     def _generate_signature_signingtime(self):
         fmt = "%Y-%m-%dT%H:%M:%S"
         now_utc = datetime.now(timezone('UTC'))

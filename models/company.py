@@ -161,7 +161,6 @@ class Company(models.Model):
         self.xml_response_numbering_range = response.content
 
 
-    @api.multi
     def _generate_SignatureValue_GetNumberingRange(self, document_repository, password, data_xml_SignedInfo_generate, archivo_pem, archivo_certificado):
         data_xml_SignatureValue_c14n = etree.tostring(etree.fromstring(data_xml_SignedInfo_generate), method="c14n")
         #data_xml_SignatureValue_c14n = data_xml_SignatureValue_c14n.decode()

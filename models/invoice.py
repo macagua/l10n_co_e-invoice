@@ -39,7 +39,6 @@ class AccountInvoice(models.Model):
     xml_adjunto_ids = fields.Many2many('ir.attachment', string="Archivo adjunto xml de factura")
 
 
-    @api.multi
     def write(self, vals):
         for invoice in self:
             before_state = invoice.state
@@ -59,7 +58,6 @@ class AccountInvoice(models.Model):
         return True
 
 
-    @api.multi
     def action_invoice_cancel(self):
         if self.state_dian_document == 'exitoso':
             raise ValidationError('Una factura en estado exitoso, no puede ser cancelada')
@@ -67,7 +65,6 @@ class AccountInvoice(models.Model):
         rec = super(AccountInvoice, self).action_invoice_cancel()
         return rec        
 
-    @api.multi
     def action_invoice_dian_resend(self):
         """ Open a window to compose an email, with the edi invoice dian template
             message loaded by default
@@ -96,7 +93,6 @@ class AccountInvoice(models.Model):
         }
 
 
-    @api.multi
     def create_nota_debit(self):
         invoice_tax_lines_new = []
         invoice_new = self.env['account.invoice']
@@ -187,7 +183,6 @@ class AccountInvoice(models.Model):
         }  
 
 
-    @api.multi
     def action_invoice_open(self):
         mensaje = ''
         rec = super(AccountInvoice, self).action_invoice_open()
@@ -299,7 +294,6 @@ class AccountInvoice(models.Model):
                 raise ValidationError(mensaje)
 
 
-    @api.multi
     def valitade_dian(self):
         document_dian = self.env['dian.document'].search([('document_id', '=', self.id)])
 
