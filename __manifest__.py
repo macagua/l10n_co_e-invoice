@@ -30,6 +30,6 @@
         'views/product_view.xml',
         'views/l10n_cities_co_view.xml'
     ],
-
+    'images': ['static/description/icon.png'],
     'installable' : True
 }
