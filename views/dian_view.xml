@@ -142,7 +142,6 @@
     <record model="ir.actions.act_window" id="dian_UNSPSC_segment_action_view">
         <field name="name">DIAN UNSPSC Segmento</field>
         <field name="res_model">dian.unspsc.segment</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -166,7 +165,6 @@
     <record model="ir.actions.act_window" id="dian_UNSPSC_family_action_view">
         <field name="name">DIAN UNSPSC Familia</field>
         <field name="res_model">dian.unspsc.family</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -190,7 +188,6 @@
     <record model="ir.actions.act_window" id="dian_UNSPSC_class_action_view">
         <field name="name">DIAN UNSPSC Clase</field>
         <field name="res_model">dian.unspsc.class</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -217,7 +214,6 @@
     <record model="ir.actions.act_window" id="dian_UNSPSC_product_action_view">
         <field name="name">DIAN UNSPSC Producto</field>
         <field name="res_model">dian.unspsc.product</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
