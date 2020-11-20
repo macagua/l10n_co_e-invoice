@@ -12,6 +12,7 @@
         'account',
         'contacts',
         'stock',
+        'l10n_co',
         'l10n_co_tax_extension'
     ],
     'data': [
