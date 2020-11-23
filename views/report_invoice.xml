@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
+
+  <data>
 
     <template id="report_invoice_document_inherit" inherit_id="l10n_co_tax_extension.report_invoice_document_inherit">
 
@@ -52,14 +53,17 @@
 
     </template>
 
-
-    <!--<template id="report_invoice_document_inherit_fe" inherit_id="account.report_invoice_document">
+    <!--
+    <template id="report_invoice_document_inherit_fe" inherit_id="account.report_invoice_document">
       <xpath expr="//div//h2/span[1]" position="replace">
         <br />
         <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Factura Electrónica de Venta</span>
 
       </xpath>
       
-    </template>-->
-</data>
+    </template>
+    -->
+
+  </data>
+
 </odoo>

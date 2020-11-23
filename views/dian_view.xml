@@ -12,7 +12,7 @@
                 <field name="customer_name"/>
                 <field name="dian_code"/>
                 <field name="date_document_dian"/>
-<!--                 <field name="last_shipping"/> -->
+                <!-- <field name="last_shipping"/> -->
                 <field name="date_email_send"/>
                 <field name="email_response"/>
                 <field name="state"/>
@@ -31,11 +31,13 @@
         <field name="model">dian.document</field>
         <field name="arch" type="xml">
             <form create='false' delete='false' edit='false'>
-<!--                 <header>
+                <!--
+                <header>
                     <field name="resend" invisible="True"/>
                     <button name="generate_new_dian_document" string="Autorizar Reenvio" type="object" class="oe_highlight" attrs="{'invisible': [('resend', '=', False)]}" confirm="Desea autorizar un nuevo envio?"/>  
                     <field name="state" widget="statusbar"/>
-                </header> -->
+                </header>
+                -->
                 <body>
                     <group>
                         <group>
@@ -78,7 +80,6 @@
         </field>
     </record>
 
-
     <record id="dian_document_search_view" model="ir.ui.view">
         <field name="name">Filtrar Documentos DIAN</field>
         <field name="model">dian.document</field>
@@ -88,7 +89,7 @@
                 <field name="dian_code"/>
                 <field name="date_document_dian"/>
                 <filter name="filter_por_notificar" string="Por notificar" domain="[('state','=','por_notificar')]"/>
-<!--                 <filter name="filter_error" string="Error" domain="[('state','=','error')]"/> -->
+                <!-- <filter name="filter_error" string="Error" domain="[('state','=','error')]"/> -->
                 <filter name="filter_por_validar" string="Por validar" domain="[('state','=','por_validar')]"/>
                 <filter name="filter_exitoso" string="Exitoso" domain="[('state','=','exitoso')]"/>
                 <filter name="filter_rechazado" string="Rechazado" domain="[('state','=','rechazado')]"/>
@@ -113,7 +114,7 @@
                 context="{'search_default_filter_por_validar' : 1, 'search_default_filter_por_notificar' : 1}"
     />
 
-
+    <!-- Menu item -->
     <menuitem   id="dian_document_menu"
                 name="Documentos DIAN"
                 action="dian_document_action_view"
@@ -121,12 +122,12 @@
                 sequence="99"
     />
 
+    <!-- Menu item -->
     <menuitem   id="menu_dian_unspsc" 
                 name="DIAN Clasificador de Bienes y Servicios UNSPSC" 
                 parent="stock.menu_stock_config_settings" 
                 sequence="99"
     />
-
   
     <record id="dian_UNSPSC_segment_tree_view" model="ir.ui.view">
         <field name="name">Lista de Segmentos UNSPSC DIAN</field>
@@ -146,6 +147,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Menu item -->
     <menuitem action="dian_UNSPSC_segment_action_view" 
               id="dian_UNSPSC_segment_menu" 
               parent="menu_dian_unspsc" 
@@ -170,6 +172,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Menu item -->
     <menuitem action="dian_UNSPSC_family_action_view" 
               id="dian_UNSPSC_family_menu" 
               parent="menu_dian_unspsc" 
@@ -194,6 +197,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Menu item -->
     <menuitem action="dian_UNSPSC_class_action_view" 
               id="dian_UNSPSC_class_menu" 
               parent="menu_dian_unspsc" 
@@ -221,33 +225,41 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Menu item -->
     <menuitem action="dian_UNSPSC_product_action_view" 
               id="dian_UNSPSC_product_menu" 
               parent="menu_dian_unspsc" 
               sequence="98"
     />
 
-<!--     <record id="send_pending_dian_cron" model="ir.cron">
+    <!--
+    <record id="send_pending_dian_cron" model="ir.cron">
         <field name="name">Enviar documentos al DIAN</field>
         <field name="model">dian.document</field>
         <field name="function">send_pending_dian</field>
-        <field name="args">()</field>
+        -->
+        <!-- <field name="args">()</field> -->
+        <!--
         <field name="interval_type">hours</field>
         <field name="interval_number">1</field>
         <field name="numbercall">-1</field>
         <field name="active">False</field>
     </record>
+    -->
 
-
+    <!--
     <record id="request_validating_dian_cron" model="ir.cron">
         <field name="name">Solicitar validación de documentos enviados al DIAN</field>
         <field name="model">dian.document</field>
         <field name="function">request_validating_dian</field>
-        <field name="args">()</field>
+        -->
+        <!-- <field name="args">()</field> -->
+        <!--
         <field name="interval_type">hours</field>
         <field name="interval_number">1</field>
         <field name="numbercall">-1</field>
         <field name="active">False</field>
-    </record> -->
+    </record>
+    -->
 
 </odoo>

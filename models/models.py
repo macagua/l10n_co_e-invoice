@@ -4,7 +4,6 @@ from openerp.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta, date
 
 
-
 class IrAttachment(models.Model):
     _inherit = "ir.attachment"
 
@@ -15,12 +14,14 @@ class IrAttachment(models.Model):
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    operation_type = fields.Selection([('01','Combustible'),('02','Emisor es Autoretenedor'),('03','Excluidos y Exentos'),
-    ('04','Exportación'),('05','Genérica'),('06','Genérica con pago anticipado'),
-    ('07','Genérica con periodo de facturación'),('08','Consorcio'),('09','Servicios AIU'),('10','Estándar'),
-    ('11','Mandatos bienes'),('12','Mandatos Servicios'),('00', 'No Aplica')], string='Tipo de operación DIAN')
-	
+    operation_type = fields.Selection([
+        ('01','Combustible'),('02','Emisor es Autoretenedor'),('03','Excluidos y Exentos'),
+        ('04','Exportación'),('05','Genérica'),('06','Genérica con pago anticipado'),
+        ('07','Genérica con periodo de facturación'),('08','Consorcio'),('09','Servicios AIU'),
+        ('10','Estándar'), ('11','Mandatos bienes'),('12','Mandatos Servicios'),
+        ('00', 'No Aplica')], string='Tipo de operación DIAN'
+    )
     product_UNSPSC_id = fields.Many2one('dian.unspsc.product', string="Producto UNSPSC")
     segment_name = fields.Char(string="Segmento UNSPSC", readonly=True, related='product_UNSPSC_id.segment_id.name')
     family_name = fields.Char(string="Familia UNSPSC", readonly=True, related='product_UNSPSC_id.family_id.name')
-    class_name = fields.Char(string="Segmento UNSPSC", readonly=True, related='product_UNSPSC_id.class_id.name')
+    class_name = fields.Char(string="Clase UNSPSC", readonly=True, related='product_UNSPSC_id.class_id.name')

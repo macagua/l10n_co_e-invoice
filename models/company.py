@@ -70,7 +70,7 @@ class Company(models.Model):
     trade_name = fields.Char(string="Razón social", required=True, default="")
     digital_certificate = fields.Text(string="Certificado digital público", required=True, default="")
     software_identification_code = fields.Char(string="Código de identificación del software", required=True, default="")
-    identificador_set_pruebas = fields.Char(string = 'Identificador del SET de pruebas', required = True ) 
+    identificador_set_pruebas = fields.Char(string='Identificador del SET de pruebas', required=True)
     
     software_pin = fields.Char(string="PIN del software", required=True, default="")
     password_environment = fields.Char(string="Clave de ambiente", required=True, default="")
@@ -80,10 +80,13 @@ class Company(models.Model):
     document_repository = fields.Char(string='Ruta de almacenamiento de archivos', required=True)
     in_use_dian_sequence = fields.Selection('_get_dian_sequence', 'Secuenciador DIAN a utilizar', required=False)
     certificate_key = fields.Char(string='Clave del certificado P12', required=True, default="")
-    operation_type = fields.Selection([('01','Combustible'),('02','Emisor es Autoretenedor'),('03','Excluidos y Exentos'),
-    ('04','Exportación'),('05','Genérica'),('06','Genérica con pago anticipado'),
-    ('07','Genérica con periodo de facturación'),('08','Consorcio'),('09','AIU'),('10','Estándar *'),
-    ('11','Mandatos'),('12','Mandatos Servicios')], string='Tipo de operación DIAN', required=True)
+    operation_type = fields.Selection([
+        ('01','Combustible'),('02','Emisor es Autoretenedor'),('03','Excluidos y Exentos'),
+        ('04','Exportación'),('05','Genérica'),('06','Genérica con pago anticipado'),
+        ('07','Genérica con periodo de facturación'),('08','Consorcio'),('09','AIU'),
+        ('10','Estándar *'),('11','Mandatos'),('12','Mandatos Servicios')],
+        string='Tipo de operación DIAN', required=True
+    )
     pem = fields.Char(string="Nombre del archivo PEM del certificado", required=True, default="")
     certificate = fields.Char(string="Nombre del archivo del certificado", required=True, default="")
     production = fields.Boolean(string='Pase a producción', default=False)
@@ -167,11 +170,11 @@ class Company(models.Model):
         #data_xml_SignatureValue_c14n = data_xml_SignatureValue_c14n.decode()
         archivo_key = document_repository+'/'+archivo_certificado
         try:
-            key = crypto.load_pkcs12(open(archivo_key, 'rb').read(), password)  
+            key = crypto.load_pkcs12(open(archivo_key, 'rb').read(), password)
         except Exception as ex:
             raise UserError(tools.ustr(ex))
         try:
-            signature = crypto.sign(key.get_privatekey(), data_xml_SignatureValue_c14n, 'sha256')               
+            signature = crypto.sign(key.get_privatekey(), data_xml_SignatureValue_c14n, 'sha256')
         except Exception as ex:
             raise UserError(tools.ustr(ex))
         SignatureValue = base64.b64encode(signature).decode()
@@ -200,7 +203,7 @@ class Company(models.Model):
         now_bogota = datetime.now(timezone('UTC'))
         #now_bogota = now_utc.astimezone(timezone('America/Bogota'))
         Created = now_bogota.strftime(fmt)[:-3]+'Z'      
-        now_bogota = now_bogota + timedelta(minutes=5) 
+        now_bogota = now_bogota + timedelta(minutes=5)
         Expires = now_bogota.strftime(fmt)[:-3]+'Z'
         timestamp = {'Created' : Created,
             'Expires' : Expires

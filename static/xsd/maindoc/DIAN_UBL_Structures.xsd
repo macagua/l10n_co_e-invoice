@@ -13,7 +13,7 @@
 	<!-- ===== Element Declarations ===== -->
 	<element name="DianExtensions" type="sts:DianExtensionsType">
 		<annotation>
-			<documentation>Extension DIAN - DianExtensions (raíz)</documentation>
+			<documentation>Extensión DIAN - DianExtensions (raíz)</documentation>
 		</annotation>
 	</element>
 	<!-- ===== Type Definitions ===== -->
@@ -31,7 +31,7 @@
 			</element>
 			<element name="SoftwareProvider" type="sts:SoftwareProvider" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Gupo de informaciones sobre el prestador de servicios</documentation>
+					<documentation>Grupo de informaciones sobre el prestador de servicios</documentation>
 				</annotation>
 			</element>
 			<element name="SoftwareSecurityCode" type="udt:IdentifierType" minOccurs="1"
@@ -351,7 +351,7 @@
 	<complexType name="AuthorizationProvider">
 		<annotation>
 			<documentation>
-				Informacion del Proveedor Autorizado (PA) por la DIAN
+				Información del Proveedor Autorizado (PA) por la DIAN
 			</documentation>
 		</annotation>
 		<sequence>
@@ -362,7 +362,7 @@
 	<complexType name="QRCode">
 		<annotation>
 			<documentation>
-				Informacion sobre el QRCode.
+				Información sobre el QRCode.
 			</documentation>
 		</annotation>
 		<sequence>

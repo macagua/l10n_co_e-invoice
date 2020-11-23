@@ -111,9 +111,11 @@ tributes = {
 
 import os
 
+
 class DianDocument(models.Model):
     _name = 'dian.document'
     _rec_name = 'dian_code'
+    _description = 'Model to manipulate DIAN Documents'
 
     document_id = fields.Many2one('account.invoice', string="Número de documento", readonly=True, required=True)
     state = fields.Selection([('por_notificar', 'Por notificar'), 
@@ -3020,7 +3022,7 @@ class DianDocument(models.Model):
         now_time = now_utc.strftime(fmt)
         return now_time
 
-    
+
     @api.multi
     def _generate_signature_signingtime(self):
         fmt = "%Y-%m-%dT%H:%M:%S"

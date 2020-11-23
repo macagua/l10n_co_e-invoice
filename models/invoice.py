@@ -5,10 +5,10 @@ from datetime import datetime, timedelta, date
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
     _name = 'account.invoice'
-
 
     diancode_id = fields.Many2one('dian.document', string="Código DIAN", readonly=True)
     state_dian_document = fields.Selection(string="Estado documento DIAN", related='diancode_id.state')
@@ -160,6 +160,7 @@ class AccountInvoice(models.Model):
                     'invoice_line_tax_ids' : line_invoice.invoice_line_tax_ids,
                     }))           
                 invoice_new.invoice_line_ids = invoice_line_new  
+
 
             for invoice_tax_line in self.tax_line_ids:
                 invoice_tax_lines_new.append((0,0,{

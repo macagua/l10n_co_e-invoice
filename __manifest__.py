@@ -2,7 +2,6 @@
 
 {
     'name': "Colombian e-invoice",
-
     'summary': """
         Generates electronic invoice for Colombian distribution according to DIAN requirements - Odoo 12.0""",
     'category': 'Administration',
